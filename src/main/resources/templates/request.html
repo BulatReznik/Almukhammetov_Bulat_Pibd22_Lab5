@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{default}">
+<head>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Наименование товара</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="consignment, iterator: ${NewConsignmentDto}">
+                <th scope="row" th:text="${iterator.index} + 1"/>
+                <td th:text="${consignment.consignmentName}"/>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <form action="#" th:action="@{/request}" method="get">
+        <label class="form-label">Покупатель</label>
+        <select class="form-select" th:name="getId">
+            <option
+                    th:each="customer: ${customers}" th:selected="${getId} == ${customer.id}" th:value="${customer.id}"><span
+                    th:text="${customer.lastName}"></span>
+            </option>
+        </select>
+        <button type="submit" class="btn btn-primary">Вывести</button>
+    </form>
+
+</div>
+</body>
+</html>
